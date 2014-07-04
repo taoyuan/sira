@@ -4,7 +4,7 @@ var s = require('./support');
 var t = s.t;
 var Resolver = require('../lib/resolver');
 
-describe('Resolver', function () {
+describe('resolver', function () {
 
     describe('without mechanisms', function () {
         var resolver = new Resolver();
