@@ -14,4 +14,4 @@ require('pkginfo')(module, 'version');
 exports.boot = {};
 exports.boot.handlers = require('./lib/boot/handlers');
 exports.boot.database = require('./lib/boot/database');
-exports.boot.models = require('./lib/boot/models');
+exports.boot.definitions = require('./lib/boot/definitions');

@@ -2,7 +2,7 @@
 
 var s = require('./support');
 var t = s.t;
-var bootModels = require('../lib/boot/models');
+var bootDefinitions = require('../lib/boot/definitions');
 var bootDatabase = require('../lib/boot/database');
 
 
@@ -11,7 +11,7 @@ describe('boot/database', function () {
     var app;
     beforeEach(function () {
         app = s.mockApplication();
-        bootModels('test/fixtures/sample-app/models').call(app);
+        bootDefinitions('test/fixtures/sample-app/models').call(app);
     });
 
     it('should connect database and publish schemas', function () {

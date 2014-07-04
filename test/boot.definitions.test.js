@@ -2,7 +2,7 @@
 
 var s = require('./support');
 var t = s.t;
-var loadModels = require('../lib/boot/models');
+var bootDefinitions = require('../lib/boot/definitions');
 
 
 describe('boot/models', function () {
@@ -11,7 +11,7 @@ describe('boot/models', function () {
         var app;
         beforeEach(function () {
             app = s.mockApplication();
-            loadModels('test/fixtures/sample-app/models').call(app);
+            bootDefinitions('test/fixtures/sample-app/models').call(app);
         });
 
         it('should load models from dir', function () {
