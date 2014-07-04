@@ -23,13 +23,6 @@ describe('boot/models', function () {
 
         });
 
-        it('should execute super setup', function () {
-            var defCar = app.__definitions['Car'];
-            var modCar = {};
-            defCar.setup(modCar, app);
-            t.isTrue(modCar.setupBase);
-            t.isTrue(modCar.setupCar);
-        });
     });
 
 

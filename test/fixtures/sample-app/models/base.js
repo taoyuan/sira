@@ -3,7 +3,7 @@
 module.exports = {
     "virtual": true,
     "properties": {
-        "createdAt": {type : Date, default : Date.now},
+        "createdAt": Date,
         "updatedAt": Date
     }
 };
