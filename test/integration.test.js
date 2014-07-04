@@ -3,7 +3,7 @@
 var s = require('./support');
 var t = s.t;
 var path = require('path');
-var noa = require('../');
+var sira = require('../');
 
 describe('integration', function () {
 
@@ -19,12 +19,12 @@ describe('integration', function () {
     };
 
     before(function (done) {
-        app = new noa.Application();
+        app = new sira.Application();
         // initialization phases
-        app.phase(noa.boot.handlers(path.join(root, 'handlers')));
+        app.phase(sira.boot.handlers(path.join(root, 'handlers')));
         app.phase(configure);
-        app.phase(noa.boot.models(path.join(root, 'models')));
-        app.phase(noa.boot.database(database, schemap));
+        app.phase(sira.boot.models(path.join(root, 'models')));
+        app.phase(sira.boot.database(database, schemap));
 
         // configure
         function configure() {

@@ -1,7 +1,7 @@
 "use strict";
 
-var noa = require('../');
+var sira = require('../');
 
 exports = module.exports = function (cmd) {
-    return noa().createContext(cmd);
+    return sira().createContext(cmd);
 };

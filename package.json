@@ -1,21 +1,21 @@
 {
-  "name": "noa",
+  "name": "sira",
   "version": "0.0.1",
   "description": "A simple node application framework.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/taoyuan/noa.git"
+    "url": "https://github.com/taoyuan/sira.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/taoyuan/noa/issues"
+    "url": "https://github.com/taoyuan/sira/issues"
   },
-  "homepage": "https://github.com/taoyuan/noa",
+  "homepage": "https://github.com/taoyuan/sira",
   "dependencies": {
     "assert": "^1.1.1",
     "async": "^0.9.0",
@@ -24,7 +24,7 @@
     "delegates": "0.0.3",
     "inflection": "^1.3.7",
     "lodash": "^2.4.1",
-    "middist": "git://github.com/taoyuan/middist",
+    "middist": "taoyuan/middist",
     "needs": "taoyuan/needs",
     "pkginfo": "^0.3.0"
   },

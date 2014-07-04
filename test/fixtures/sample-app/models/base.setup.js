@@ -1,5 +1,5 @@
 "use strict";
 
-var setup = module.exports = function (Base, noa) {
+var setup = module.exports = function (Base, sira) {
     Base.setupBase = true;
 };

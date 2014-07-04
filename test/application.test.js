@@ -3,7 +3,7 @@
 var s = require('./support');
 var t = s.t;
 
-var noa = require('../');
+var sira = require('../');
 var commander = require('./commander');
 
 describe('app', function () {
@@ -11,7 +11,7 @@ describe('app', function () {
 
 
         it('should handle middleware errors', function (done) {
-            var app = noa();
+            var app = sira();
 
             app.use(function (c) {
                 // triggers this.socket.writable == false
@@ -26,7 +26,7 @@ describe('app', function () {
         });
 
         it('should emit "error" on the app for ctx.throw()', function (done) {
-            var app = noa();
+            var app = sira();
 
             app.use(function (c) {
                 // triggers this.socket.writable == false
@@ -43,7 +43,7 @@ describe('app', function () {
         });
 
         it('should emit "error" on the app for new Error() ', function (done) {
-            var app = noa();
+            var app = sira();
 
             app.use(function () {
                 throw new Error('boom');
@@ -59,7 +59,7 @@ describe('app', function () {
         });
 
         it('should be catchable', function(done){
-            var app = noa();
+            var app = sira();
 
             app.use(function (c, next){
                 next(function (err, c) {
@@ -81,7 +81,7 @@ describe('app', function () {
 
 describe('app.use(fn)', function () {
     it('should compose middleware', function (done) {
-        var app = noa();
+        var app = sira();
         var calls = [];
 
         app.use(function (c, next) {
@@ -118,7 +118,7 @@ describe('app.respond', function () {
 
     describe('when .res is an String', function() {
         it('should respond', function (done) {
-            var app = noa();
+            var app = sira();
 
             app.use(function (c) {
                 c.res = 'Hello';
@@ -132,7 +132,7 @@ describe('app.respond', function () {
     describe('when .res is an Object', function(){
         it('should respond with json', function(done){
             var res = { hello: 'world' };
-            var app = noa();
+            var app = sira();
 
             app.use(function (c){
                 c.res = res;
@@ -146,9 +146,9 @@ describe('app.respond', function () {
 
 
 describe('app.context', function(){
-    var app1 = noa();
+    var app1 = sira();
     app1.context.message = 'hello';
-    var app2 = noa();
+    var app2 = sira();
 
     it('should merge properties', function(done){
         app1.use(function (c){
