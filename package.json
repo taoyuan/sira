@@ -1,6 +1,6 @@
 {
   "name": "sira",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple node application framework.",
   "main": "index.js",
   "scripts": {
