@@ -4,7 +4,7 @@ var middist = require('../lib/middist');
 var s = require('./support');
 var t = s.t;
 
-describe.only('app, middleware manager', function () {
+describe('app, middleware manager', function () {
     var app, data;
     beforeEach(function () {
         app = middist();
