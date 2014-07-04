@@ -17,7 +17,7 @@ describe('boot/models', function () {
         it('should load models from dir', function () {
             var defCar = app.__definitions['Car'];
             t.ok(defCar);
-            t.deepProperty(defCar, 'properties.createAt');
+            t.deepProperty(defCar, 'properties.createdAt');
             t.isFunction(defCar.setup);
             t.isFunction(defCar.setup.super_);
 
@@ -25,12 +25,10 @@ describe('boot/models', function () {
 
         it('should execute super setup', function () {
             var defCar = app.__definitions['Car'];
-            var messages = [];
-            app.log = function (msg) {
-                messages.push(msg);
-            };
-            defCar.setup({}, app);
-            t.deepEqual(messages, ['Base', 'Car']);
+            var modCar = {};
+            defCar.setup(modCar, app);
+            t.isTrue(modCar.setupBase);
+            t.isTrue(modCar.setupCar);
         });
     });
 

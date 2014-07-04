@@ -5,7 +5,7 @@ var t = s.t;
 var path = require('path');
 var noa = require('../');
 
-describe.only('integration', function () {
+describe('integration', function () {
 
     var app;
     var root = 'test/fixtures/sample-app';

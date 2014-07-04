@@ -8,12 +8,9 @@ var bootDatabase = require('../lib/boot/database');
 
 describe('boot/database', function () {
 
-    var app, messages = [];
+    var app;
     beforeEach(function () {
         app = s.mockApplication();
-        app.log = function (msg) {
-            messages.push(msg);
-        };
         bootModels('test/fixtures/sample-app/models').call(app);
     });
 
@@ -21,8 +18,9 @@ describe('boot/database', function () {
         bootDatabase({}, '*').call(app);
         t.lengthOf(app.schema, 1);
         t.lengthOf(Object.keys(app.models), 2);
-        t.deepEqual(messages, ['Base', 'Car']);
+        var Car = app.models['Car'];
+        t.isTrue(Car.setupBase);
+        t.isTrue(Car.setupCar);
     });
-
 
 });
