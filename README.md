@@ -1,4 +1,4 @@
-noa
+sira
 ===
 
-A simple node application framework
+> A simple node application framework

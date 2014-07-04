@@ -22,8 +22,8 @@ describe('integration', function () {
         app = new sira.Application();
         // initialization phases
         app.phase(sira.boot.handlers(path.join(root, 'handlers')));
-        app.phase(configure);
         app.phase(sira.boot.models(path.join(root, 'models')));
+        app.phase(configure);
         app.phase(sira.boot.database(database, schemap));
 
         // configure
