@@ -8,7 +8,7 @@ var sira = require('../');
 describe('integration', function () {
 
     describe('boot.component', function () {
-        it('should load definitions and handler from dir', function (done) {
+        it('should load dir component resources', function (done) {
             var app = new sira.Application();
             app.phase(sira.boot.component('./test/fixtures/sample-app'));
             app.boot(function (err) {
