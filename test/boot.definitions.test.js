@@ -17,7 +17,7 @@ describe('boot/models', function () {
         it('should load models from dir', function () {
             var defCar = app.__definitions['Car'];
             t.ok(defCar);
-            t.deepProperty(defCar, 'properties.createdAt');
+            t.deepProperty(defCar, 'properties.created');
             t.isFunction(defCar.setup);
             t.isFunction(defCar.setup.super_);
 
