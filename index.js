@@ -15,3 +15,4 @@ exports.boot = {};
 exports.boot.handlers = require('./lib/boot/handlers');
 exports.boot.database = require('./lib/boot/database');
 exports.boot.definitions = require('./lib/boot/definitions');
+exports.boot.component = require('./lib/boot/component');
