@@ -14,7 +14,7 @@ describe('integration', function () {
             app.boot(function (err) {
                 if (err) return done(err);
                 t.deepEqual(Object.keys(app.__definitions), ['Base', 'Car', 'Dealership']);
-                t.lengthOf(app.__handlerResolver.stack, 1);
+                t(app.__handlerResolver.stack.length > 0);
                 done();
             })
         });
