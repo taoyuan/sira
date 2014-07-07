@@ -26,7 +26,8 @@
     "middist": "taoyuan/middist",
     "needs": "taoyuan/needs",
     "pkginfo": "^0.3.0",
-    "resolve": "^0.7.1"
+    "resolve": "^0.7.1",
+    "strong-remoting": "^2.0.0-beta4"
   },
   "devDependencies": {
     "async": "^0.9.0",
