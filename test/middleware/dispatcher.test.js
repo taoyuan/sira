@@ -9,8 +9,8 @@ function dispatcher(app) {
     return new Dispatcher(app).middleware;
 }
 
-function commandHandler(done) {
-    done(null, 'command:' + this.cmd.command);
+function requestHandler(done) {
+    done(null, 'request:' + this.request.uri);
 }
 
 function nextHandler(done) {
@@ -23,14 +23,14 @@ describe('middleware/dispatch', function() {
         t.equal(dispatcher().name, 'dispatcher');
     });
 
-    describe('dispatching to handler that uses command', function() {
+    describe('dispatching to handler that uses request', function() {
         var error, result;
 
         var app = s.mockApplication();
-        app.__handlers['robots'] = commandHandler;
+        app.__handlers['robots'] = requestHandler;
 
         before(function(done) {
-            dispatcher(app)(context(s.command('robots')), function (err, data) {
+            dispatcher(app)(context(s.request('robots')), function (err, data) {
                 error = err;
                 result = data;
                 done();
@@ -39,7 +39,7 @@ describe('middleware/dispatch', function() {
 
         it('should respond', function() {
             t.notOk(error);
-            t.equal(result, 'command:robots');
+            t.equal(result, 'request:robots');
         });
     });
 
@@ -50,7 +50,7 @@ describe('middleware/dispatch', function() {
         app.__handlers['robots'] = nextHandler;
 
         before(function(done) {
-            dispatcher(app)(context(s.command('robots')), function (err, data) {
+            dispatcher(app)(context(s.request('robots')), function (err, data) {
                 error = err;
                 result = data;
                 done();
@@ -69,7 +69,7 @@ describe('middleware/dispatch', function() {
         var app = s.mockApplication();
 
         before(function(done) {
-            dispatcher(app)(context(s.command('invalid')), function (err) {
+            dispatcher(app)(context(s.request('invalid')), function (err) {
                 error = err;
                 done();
             });

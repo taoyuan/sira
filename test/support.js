@@ -24,6 +24,6 @@ exports.schema = function () {
     return new Schema('memory');
 };
 
-exports.command = function (name, payload) {
-    return { command: name, payload: payload };
+exports.request = function (uri, payload) {
+    return { uri: name, payload: payload };
 };

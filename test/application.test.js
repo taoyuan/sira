@@ -4,7 +4,7 @@ var s = require('./support');
 var t = s.t;
 
 var sira = require('../');
-var commander = require('./commander');
+var request = require('./request');
 
 describe('app', function () {
     describe('when an error occurs', function() {
@@ -18,7 +18,7 @@ describe('app', function () {
                 c.throw('boom');
             });
 
-            commander(app)
+            request(app)
                 .end(function (err) {
                     t.equal(err.message, 'boom');
                     done();
@@ -38,7 +38,7 @@ describe('app', function () {
                 done();
             });
 
-            commander(app)
+            request(app)
                 .end();
         });
 
@@ -54,7 +54,7 @@ describe('app', function () {
                 done();
             });
 
-            commander(app)
+            request(app)
                 .end();
         });
 
@@ -72,7 +72,7 @@ describe('app', function () {
                 throw new Error('boom!');
             });
 
-            commander(app)
+            request(app)
                 .expect('Got error', done);
         })
     });
@@ -105,7 +105,7 @@ describe('app.use(fn)', function () {
             });
         });
 
-        commander(app)
+        request(app)
             .end(function (err) {
                 if (err) return done(err);
                 t.deepEqual(calls, [1, 2, 3, 4, 5, 6]);
@@ -124,7 +124,7 @@ describe('app.respond', function () {
                 c.res = 'Hello';
             });
 
-            commander(app)
+            request(app)
                 .expect('Hello', done);
         });
     });
@@ -138,7 +138,7 @@ describe('app.respond', function () {
                 c.res = res;
             });
 
-            commander(app)
+            request(app)
                 .expect(res, done);
         })
     })
@@ -156,7 +156,7 @@ describe('app.context', function(){
             c.res = 'tao'
         });
 
-        commander(app1)
+        request(app1)
             .expect('tao', done);
     });
 
@@ -166,7 +166,7 @@ describe('app.context', function(){
             c.res = 'tao';
         });
 
-        commander(app2)
+        request(app2)
             .expect('tao', done);
     });
 });

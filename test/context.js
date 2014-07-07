@@ -2,6 +2,6 @@
 
 var sira = require('../');
 
-exports = module.exports = function (cmd) {
-    return sira().createContext(cmd);
+exports = module.exports = function (req) {
+    return sira().createContext(req);
 };

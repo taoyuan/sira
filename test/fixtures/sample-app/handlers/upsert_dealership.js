@@ -4,7 +4,7 @@ var async = require('async');
 
 module.exports = function (next) {
     var c = this;
-    var data = this.cmd.payload;
+    var data = this.request.payload;
 
     async.waterfall([
         function (cb) {
