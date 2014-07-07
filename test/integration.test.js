@@ -14,7 +14,6 @@ describe('integration', function () {
             app.boot(function (err) {
                 if (err) return done(err);
                 t.deepEqual(Object.keys(app.__definitions), ['Base', 'Car', 'Dealership']);
-                t(app.__handlerResolver.stack.length > 0);
                 done();
             })
         });
@@ -45,42 +44,40 @@ describe('integration', function () {
             function configure() {
                 // use some middlewares
 
-                this.use(this.invoker);
                 // end use dispatcher
                 this.use(this.dispatcher);
             }
 
             app.boot(function (err) {
                 if (err) return done(err);
-                t.isFunction(app._handler('UpsertDealership'));
                 t.deepEqual(Object.keys(app.models), ['Car', 'Dealership']);
                 done();
             });
         });
 
-        it('should handle a request with a custom handler', function (done) {
+        it('should handle a request with handler', function (done) {
+            app.handle('dealerships.echo', {msg: 'hello'}, function (err, c) {
+                if (err) return done(err);
+                t.deepEqual(c.result, {msg: 'hello'});
+                done();
+            });
+        });
+
+
+        it('should handle a request for upsert ', function (done) {
             var dealership = {
                 name: 'Sira',
                 zip: 101010,
                 address: 'Guangzhou China'
             };
 
-            app.handle('UpsertDealership', dealership, function (err, c) {
+            app.handle('dealerships.upsert', dealership, function (err, c) {
                 if (err) return done(err);
                 t.includeProperties(c.result, dealership);
                 done();
             });
         });
 
-        it.only('should handle a request with model method', function (done) {
-
-
-            app.handle('Dealership.echo', {msg: 'hello'}, function (err, c) {
-                if (err) return done(err);
-                t.deepEqual(c.result, {msg: 'hello'});
-                done();
-            });
-        });
     });
 
 
