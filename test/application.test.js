@@ -63,12 +63,12 @@ describe('app', function () {
 
             app.use(function (c, next){
                 next(function (err, c) {
-                    c.res = err ? 'Got error' : 'Hello'
+                    c.result = err ? 'Got error' : 'Hello'
                 });
             });
 
             app.use(function (c){
-                c.res = 'Oh no';
+                c.result = 'Oh no';
                 throw new Error('boom!');
             });
 
@@ -116,12 +116,12 @@ describe('app.use(fn)', function () {
 
 describe('app.respond', function () {
 
-    describe('when .res is an String', function() {
+    describe('when .result is an String', function() {
         it('should respond', function (done) {
             var app = sira();
 
             app.use(function (c) {
-                c.res = 'Hello';
+                c.result = 'Hello';
             });
 
             request(app)
@@ -129,17 +129,17 @@ describe('app.respond', function () {
         });
     });
 
-    describe('when .res is an Object', function(){
+    describe('when .result is an Object', function(){
         it('should respond with json', function(done){
-            var res = { hello: 'world' };
+            var result = { hello: 'world' };
             var app = sira();
 
             app.use(function (c){
-                c.res = res;
+                c.result = result;
             });
 
             request(app)
-                .expect(res, done);
+                .expect(result, done);
         })
     })
 });
@@ -153,7 +153,7 @@ describe('app.context', function(){
     it('should merge properties', function(done){
         app1.use(function (c){
             t.equal(c.message, 'hello');
-            c.res = 'tao'
+            c.result = 'tao'
         });
 
         request(app1)
@@ -163,7 +163,7 @@ describe('app.context', function(){
     it('should not affect the original prototype', function(done){
         app2.use(function (c){
             t.equal(c.message, undefined);
-            c.res = 'tao';
+            c.result = 'tao';
         });
 
         request(app2)

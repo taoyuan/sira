@@ -33,7 +33,7 @@ describe('integration', function () {
             main: '*'
         };
 
-        before(function (done) {
+        beforeEach(function (done) {
             app = new sira.Application();
             // initialization phases
             app.phase(sira.boot.handlers(path.join(root, 'handlers')));
@@ -45,6 +45,7 @@ describe('integration', function () {
             function configure() {
                 // use some middlewares
 
+                this.use(this.invoker);
                 // end use dispatcher
                 this.use(this.dispatcher);
             }
@@ -57,7 +58,7 @@ describe('integration', function () {
             });
         });
 
-        it('should execute a command', function (done) {
+        it('should handle a request with a custom handler', function (done) {
             var dealership = {
                 name: 'Sira',
                 zip: 101010,
@@ -66,7 +67,17 @@ describe('integration', function () {
 
             app.handle('UpsertDealership', dealership, function (err, c) {
                 if (err) return done(err);
-                t.includeProperties(c.res, dealership);
+                t.includeProperties(c.result, dealership);
+                done();
+            });
+        });
+
+        it.only('should handle a request with model method', function (done) {
+
+
+            app.handle('Dealership.echo', {msg: 'hello'}, function (err, c) {
+                if (err) return done(err);
+                t.deepEqual(c.result, {msg: 'hello'});
                 done();
             });
         });

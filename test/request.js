@@ -2,14 +2,14 @@
 
 var t = require('chai').assert;
 
-module.exports = function (app, res) {
-    return new Request(app, res);
+module.exports = function (app, result) {
+    return new Request(app, result);
 };
 
-function Request(app, res) {
+function Request(app, result) {
     if (!(this instanceof Request)) return new Request(app);
     this.app = app;
-    this.res = res || 'res';
+    this.result = result || 'result';
 }
 
 Request.prototype.uri = function (uri) {
@@ -26,11 +26,11 @@ Request.prototype.end = function (cb) {
     this.app.handle({uri: this._uri || '', payload: this._payload || {}}, cb);
 };
 
-Request.prototype.expect = function (res, cb) {
+Request.prototype.expect = function (result, cb) {
     var self = this;
     this.end(function (err, c) {
         if (err) return cb(err);
-        t.deepEqual(c[self.res], res);
+        t.deepEqual(c[self.result], result);
         cb();
     });
 };

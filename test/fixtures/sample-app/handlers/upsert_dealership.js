@@ -17,7 +17,7 @@ module.exports = function (next) {
 
     ],function (err, dealership) {
         if (err) return next(err);
-        c.res = dealership;
+        c.result = dealership;
         next();
     });
 };
