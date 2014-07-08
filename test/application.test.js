@@ -4,7 +4,6 @@ var s = require('./support');
 var t = s.t;
 
 var sira = require('../');
-var request = require('./request');
 
 describe('app', function () {
     describe('when an error occurs', function() {
@@ -18,44 +17,31 @@ describe('app', function () {
                 c.throw('boom');
             });
 
-            request(app)
-                .end(function (err) {
-                    t.equal(err.message, 'boom');
-                    done();
-                });
-        });
-
-        it('should emit "error" on the app for ctx.throw()', function (done) {
-            var app = sira();
-
-            app.use(function (c) {
-                // triggers this.socket.writable == false
-                c.throw('boom');
-            });
-
-            app.on('error', function (err) {
+            sira.rekuest().send(app, function (err) {
                 t.equal(err.message, 'boom');
                 done();
             });
-
-            request(app)
-                .end();
         });
 
-        it('should emit "error" on the app for new Error() ', function (done) {
+        it('should throw error for ctx.throw()', function () {
+            var app = sira();
+
+            app.use(function (c) {
+                c.throw('boom');
+            });
+
+            t.throws(function () { sira.rekuest().send(app); });
+
+        });
+
+        it('should throw error for new Error() ', function () {
             var app = sira();
 
             app.use(function () {
                 throw new Error('boom');
             });
 
-            app.on('error', function (err) {
-                t.equal(err.message, 'boom');
-                done();
-            });
-
-            request(app)
-                .end();
+            t.throws(function () { sira.rekuest().send(app); });
         });
 
         it('should be catchable', function(done){
@@ -72,8 +58,10 @@ describe('app', function () {
                 throw new Error('boom!');
             });
 
-            request(app)
-                .expect('Got error', done);
+            sira.rekuest().send(app, function (err, ctx) {
+                t.equal(ctx.result, 'Got error');
+                done();
+            });
         })
     });
 
@@ -105,12 +93,11 @@ describe('app.use(fn)', function () {
             });
         });
 
-        request(app)
-            .end(function (err) {
-                if (err) return done(err);
-                t.deepEqual(calls, [1, 2, 3, 4, 5, 6]);
-                done();
-            });
+        sira.rekuest().send(app, function (err) {
+            if (err) return done(err);
+            t.deepEqual(calls, [1, 2, 3, 4, 5, 6]);
+            done();
+        });
     });
 });
 
@@ -124,8 +111,10 @@ describe('app.respond', function () {
                 c.result = 'Hello';
             });
 
-            request(app)
-                .expect('Hello', done);
+            sira.rekuest().send(app, function (err, ctx) {
+                t.equal(ctx.result, 'Hello');
+                done();
+            });
         });
     });
 
@@ -138,8 +127,10 @@ describe('app.respond', function () {
                 c.result = result;
             });
 
-            request(app)
-                .expect(result, done);
+            sira.rekuest().send(app, function (err, ctx) {
+                t.equal(ctx.result, result);
+                done();
+            });
         })
     })
 });
@@ -156,8 +147,10 @@ describe('app.context', function(){
             c.result = 'tao'
         });
 
-        request(app1)
-            .expect('tao', done);
+        sira.rekuest().send(app1, function (err, ctx) {
+            t.equal(ctx.result, 'tao');
+            done();
+        });
     });
 
     it('should not affect the original prototype', function(done){
@@ -166,8 +159,10 @@ describe('app.context', function(){
             c.result = 'tao';
         });
 
-        request(app2)
-            .expect('tao', done);
+        sira.rekuest().send(app2, function (err, ctx) {
+            t.equal(ctx.result, 'tao');
+            done();
+        });
     });
 });
 

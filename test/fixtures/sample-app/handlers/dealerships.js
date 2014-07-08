@@ -2,25 +2,25 @@
 
 var sira = require('../../../../');
 
-var Dealerships = {};
+var dealerships = {};
 
-module.exports = Dealerships;
+module.exports = dealerships;
 
-Dealerships.upsert = function (data, cb) {
+dealerships.upsert = function (data, cb) {
     var Dealership = this.app.model('Dealership');
     Dealership.upsert(data, cb);
 };
 
-Dealerships.echo = function (data, cb) {
+dealerships.echo = function (data, cb) {
     cb(null, data);
 };
 
-sira.remoteMethod(Dealerships.upsert, {
-    accepts: { name: 'data', root: true },
+sira.share(dealerships.upsert, {
+    accepts: { name: 'data', source: 'payload' },
     returns: { root: true }
 });
 
-sira.remoteMethod(Dealerships.echo, {
-    accepts: { name: 'data', root: true },
+sira.share(dealerships.echo, {
+    accepts: { name: 'data', source: 'payload' },
     returns: { root: true }
 });

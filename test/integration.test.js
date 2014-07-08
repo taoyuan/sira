@@ -56,11 +56,12 @@ describe('integration', function () {
         });
 
         it('should handle a request with handler', function (done) {
-            app.handle('dealerships.echo', {msg: 'hello'}, function (err, c) {
-                if (err) return done(err);
-                t.deepEqual(c.result, {msg: 'hello'});
-                done();
-            });
+            sira.rekuest('dealerships.echo', {msg: 'hello'})
+                .send(app, function (err, c) {
+                    if (err) return done(err);
+                    t.deepEqual(c.result, {msg: 'hello'});
+                    done();
+                });
         });
 
 
@@ -70,12 +71,12 @@ describe('integration', function () {
                 zip: 101010,
                 address: 'Guangzhou China'
             };
-
-            app.handle('dealerships.upsert', dealership, function (err, c) {
-                if (err) return done(err);
-                t.includeProperties(c.result, dealership);
-                done();
-            });
+            sira.rekuest('dealerships.upsert', dealership)
+                .send(app, function (err, c) {
+                    if (err) return done(err);
+                    t.includeProperties(c.result, dealership);
+                    done();
+                });
         });
 
     });
