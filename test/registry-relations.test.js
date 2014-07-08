@@ -46,7 +46,7 @@ describe('registry/relations', function () {
             fields: {name: String}
         });
 
-        models = reg.publish(db);
+        models = reg.apply(db);
         Book = models['Book'];
         Chapter = models['Chapter'];
         Author = models['Author'];

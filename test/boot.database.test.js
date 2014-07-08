@@ -14,7 +14,7 @@ describe('boot/database', function () {
         bootDefinitions('test/fixtures/sample-app/models').call(app);
     });
 
-    it('should connect database and publish schemas', function () {
+    it('should connect database and apply schemas', function () {
         bootDatabase({}, '*').call(app);
         t.lengthOf(app.schema, 1);
         t.lengthOf(Object.keys(app.models), 2);

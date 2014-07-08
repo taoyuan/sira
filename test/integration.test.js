@@ -19,6 +19,25 @@ describe('integration', function () {
         });
     });
 
+    describe('programmatic', function () {
+        it('should boot programmatically', function (done) {
+            var app = sira();
+            /*
+            var registry = app.registry();
+            registry.define('color', {
+                'name': String
+            }, function (color) {
+
+            });
+            registry.apply('memory');
+
+            */
+
+            done();
+
+        });
+    });
+
     describe('classic', function () {
 
         var app;
