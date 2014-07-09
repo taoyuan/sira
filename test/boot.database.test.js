@@ -16,7 +16,7 @@ describe('boot/database', function () {
 
     it('should connect database and build schemas', function () {
         bootDatabase().call(app);
-        t.lengthOf(app.schema, 1);
+        t.lengthOf(app.schemas, 1);
         t.lengthOf(Object.keys(app.models), 2);
         var Car = app.models['Car'];
         t.isTrue(Car.setupCar);

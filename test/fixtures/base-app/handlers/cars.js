@@ -2,7 +2,7 @@
 
 var sira = require('../../../../');
 
-module.exports = function (parent, app) {
+module.exports = function (parent) {
     var users = {};
 
     users.echo = function (data, cb) {

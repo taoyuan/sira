@@ -4,7 +4,7 @@ var _ = require('lodash');
 var chai = require('chai');
 chai.config.includeStack = true;
 var Schema = require('jugglingdb').Schema;
-var MockApplication = require('./mocks/application');
+var sira = require('../');
 
 var t = exports.t = chai.assert;
 
@@ -16,8 +16,8 @@ t.includeProperties = function (obj, properties, msg) {
     }
 };
 
-exports.mockApplication = function (props) {
-    return _.assign(new MockApplication(), props);
+exports.mockApplication = function () {
+    return sira();
 };
 
 exports.schema = function () {

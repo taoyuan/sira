@@ -42,12 +42,11 @@ describe('integration', function () {
         it('should boot programmatically', function (done) {
             var app = sira();
 
-            app.phase(function () {
-                this.registry.define('Color', {
-                    name: String
-                });
-                this.registry.build();
+            app.registry.define('Color', {
+                name: String
             });
+
+            app.phase(sira.boot.database());
             app.boot(function () {
                 var Color = app.models.Color;
                 Color.create({name: 'red'});
