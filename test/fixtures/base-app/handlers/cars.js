@@ -2,17 +2,21 @@
 
 var sira = require('../../../../');
 
-module.exports = function (parent) {
-    var users = {};
+module.exports = function (parent, app) {
+    var cars = {};
 
-    users.echo = function (data, cb) {
+    cars.echo = function (data, cb) {
         cb(null, data);
     };
 
-    sira.share(users.echo, {
+    sira.expose(cars.echo, {
         accepts: { name: 'data', source: 'payload' },
         returns: { root: true }
     });
 
-    return users;
+    app.on('ready', function () {
+        sira.expose.model(app.models.Car, cars);
+    });
+
+    return cars;
 };

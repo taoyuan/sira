@@ -109,7 +109,7 @@ describe('integration', function () {
         });
 
 
-        it('should handle a request for upsert ', function (done) {
+        it('should handle a request for model function', function (done) {
             var dealership = {
                 name: 'Sira',
                 zip: 101010,
