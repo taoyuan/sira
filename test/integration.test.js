@@ -38,7 +38,7 @@ describe('integration', function () {
         });
     });
 
-    describe.only('programmatic', function () {
+    describe('programmatic', function () {
         it('should boot programmatically', function (done) {
             var app = sira();
 
