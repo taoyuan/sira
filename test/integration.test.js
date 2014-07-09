@@ -8,32 +8,58 @@ var sira = require('../');
 describe('integration', function () {
 
     describe('boot.component', function () {
-        it('should load dir component resources', function (done) {
+        it('should load local component resources', function (done) {
             var app = new sira.Application();
-            app.phase(sira.boot.component('./test/fixtures/sample-app'));
+            app.phase(sira.boot.component('./test/fixtures/base-app'));
+            app.phase(sira.boot.database());
             app.boot(function (err) {
                 if (err) return done(err);
-                t.deepEqual(Object.keys(app.__definitions), ['Base', 'Car', 'Dealership']);
+                var Dealership = app.model('Dealership');
+                t(Dealership);
+                t.isFunction(Dealership.baseMethod);
+                done();
+            })
+        });
+
+        it('should extend app', function (done) {
+            var app = new sira.Application();
+            app.phase(sira.boot.component('./test/fixtures/base-app'));
+            app.phase(sira.boot.component('./test/fixtures/extended-app'));
+            app.phase(sira.boot.database());
+            app.boot(function (err) {
+                if (err) return done(err);
+                var Dealership = app.model('Dealership');
+                t(Dealership);
+                t(Dealership.properties['phone']);
+                t.isFunction(Dealership.baseMethod);
+                t.isFunction(Dealership.extendedMethod);
                 done();
             })
         });
     });
 
-    describe('programmatic', function () {
+    describe.only('programmatic', function () {
         it('should boot programmatically', function (done) {
             var app = sira();
-            /*
-            var registry = app.registry();
-            registry.define('color', {
-                'name': String
-            }, function (color) {
 
+            app.phase(function () {
+                this.registry.define('Color', {
+                    name: String
+                });
+                this.registry.build();
             });
-            registry.apply('memory');
+            app.boot(function () {
+                var Color = app.models.Color;
+                Color.create({name: 'red'});
+                Color.create({name: 'green'});
+                Color.create({name: 'blue'});
 
-            */
+                Color.all(function () {
+                    console.log(arguments);
+                });
 
-            done();
+                done();
+            });
 
         });
     });
@@ -41,7 +67,7 @@ describe('integration', function () {
     describe('classic', function () {
 
         var app;
-        var root = './test/fixtures/sample-app';
+        var root = './test/fixtures/base-app';
         var database = {
             main: {
                 driver: 'memory'

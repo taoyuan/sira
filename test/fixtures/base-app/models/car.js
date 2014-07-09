@@ -1,5 +1,4 @@
 module.exports = {
-    extend: 'Base',
     "properties": {
         "make": {
             "type": String,

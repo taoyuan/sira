@@ -11,9 +11,8 @@ var reg, db, models, Book, Chapter, Author, Reader;
 describe('registry/relations', function () {
     
     before(function (done) {
-        var definitions = {};
-        reg = Registry(definitions);
-        db = s.schema();
+        reg = new Registry();
+        models = reg.models;
         reg.define('Book', {
             fields: {name: String},
             relations: {
@@ -46,7 +45,7 @@ describe('registry/relations', function () {
             fields: {name: String}
         });
 
-        models = reg.apply(db);
+        db = reg.build();
         Book = models['Book'];
         Chapter = models['Chapter'];
         Author = models['Author'];

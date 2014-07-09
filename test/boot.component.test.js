@@ -13,7 +13,7 @@ describe('boot/component', function () {
     });
 
     it('should return 2 phases', function () {
-        var phases = bootComponent('./test/fixtures/sample-app');
+        var phases = bootComponent('./test/fixtures/base-app');
         t.lengthOf(phases, 2);
     });
 

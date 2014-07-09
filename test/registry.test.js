@@ -7,10 +7,11 @@ var Registry = require('../lib/registry');
 
 describe('registry', function () {
 
-    var reg, definitions;
+    var reg, definitions, models;
     beforeEach(function () {
-        definitions = {};
-        reg = Registry(definitions);
+        reg = new Registry();
+        definitions = reg.definitions;
+        models = reg.models;
     });
 
     it('should define model', function () {
@@ -19,9 +20,8 @@ describe('registry', function () {
     });
 
     it('should apply to schema', function () {
-        var schema = s.schema();
         reg.define('Model');
-        var models = reg.apply(schema);
+        var schema = reg.build();
         t.ok(models['Model']);
         t.ok(schema.models['Model']);
         t.equal(models['Model'], schema.models['Model']);

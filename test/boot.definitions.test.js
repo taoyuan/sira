@@ -11,16 +11,12 @@ describe('boot/models', function () {
         var app;
         beforeEach(function () {
             app = s.mockApplication();
-            bootDefinitions('test/fixtures/sample-app/models').call(app);
+            bootDefinitions('test/fixtures/base-app/models').call(app);
         });
 
         it('should load models from dir', function () {
-            var defCar = app.__definitions['Car'];
+            var defCar = app.registry.definitions['Car'];
             t.ok(defCar);
-            t.deepProperty(defCar, 'properties.created');
-            t.isFunction(defCar.setup);
-            t.isFunction(defCar.setup.super_);
-
         });
 
     });

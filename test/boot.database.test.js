@@ -11,15 +11,14 @@ describe('boot/database', function () {
     var app;
     beforeEach(function () {
         app = s.mockApplication();
-        bootDefinitions('test/fixtures/sample-app/models').call(app);
+        bootDefinitions('test/fixtures/base-app/models').call(app);
     });
 
-    it('should connect database and apply schemas', function () {
-        bootDatabase({}, '*').call(app);
+    it('should connect database and build schemas', function () {
+        bootDatabase().call(app);
         t.lengthOf(app.schema, 1);
         t.lengthOf(Object.keys(app.models), 2);
         var Car = app.models['Car'];
-        t.isTrue(Car.setupBase);
         t.isTrue(Car.setupCar);
     });
 

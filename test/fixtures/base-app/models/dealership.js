@@ -1,6 +1,5 @@
 module.exports = {
     "name": "Dealership",
-    extend: "Base",
     "properties": {
         "name": String,
         "zip": Number,
