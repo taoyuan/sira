@@ -2,8 +2,8 @@
 
 var sira = require('../../../../');
 
-module.exports = function (parent, app) {
-    var cars = {};
+module.exports = function (app) {
+    var cars = this;
 
     cars.echo = function (data, cb) {
         cb(null, data);
@@ -14,9 +14,7 @@ module.exports = function (parent, app) {
         returns: { root: true }
     });
 
-    app.on('ready', function () {
-        sira.expose.model(app.models.Car, cars);
+    app.on('models', function (models) {
+        sira.expose.model(models.Car, cars);
     });
-
-    return cars;
 };
