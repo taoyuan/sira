@@ -58,8 +58,8 @@ describe('app', function () {
                 throw new Error('boom!');
             });
 
-            sira.rekuest().send(app, function (err, ctx) {
-                t.equal(ctx.result, 'Got error');
+            sira.rekuest().send(app, function (err, result) {
+                t.equal(result, 'Got error');
                 done();
             });
         })
@@ -111,8 +111,8 @@ describe('app.respond', function () {
                 c.result = 'Hello';
             });
 
-            sira.rekuest().send(app, function (err, ctx) {
-                t.equal(ctx.result, 'Hello');
+            sira.rekuest().send(app, function (err, result) {
+                t.equal(result, 'Hello');
                 done();
             });
         });
@@ -127,8 +127,8 @@ describe('app.respond', function () {
                 c.result = result;
             });
 
-            sira.rekuest().send(app, function (err, ctx) {
-                t.equal(ctx.result, result);
+            sira.rekuest().send(app, function (err, result) {
+                t.equal(result, result);
                 done();
             });
         })
@@ -147,8 +147,8 @@ describe('app.context', function(){
             c.result = 'tao'
         });
 
-        sira.rekuest().send(app1, function (err, ctx) {
-            t.equal(ctx.result, 'tao');
+        sira.rekuest().send(app1, function (err, result) {
+            t.equal(result, 'tao');
             done();
         });
     });
@@ -159,8 +159,8 @@ describe('app.context', function(){
             c.result = 'tao';
         });
 
-        sira.rekuest().send(app2, function (err, ctx) {
-            t.equal(ctx.result, 'tao');
+        sira.rekuest().send(app2, function (err, result) {
+            t.equal(result, 'tao');
             done();
         });
     });

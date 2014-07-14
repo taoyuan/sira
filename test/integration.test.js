@@ -101,9 +101,9 @@ describe('integration', function () {
 
         it('should handle a request with handler', function (done) {
             sira.rekuest('dealerships.echo', {msg: 'hello'})
-                .send(app, function (err, c) {
+                .send(app, function (err, result) {
                     if (err) return done(err);
-                    t.deepEqual(c.result, {msg: 'hello'});
+                    t.deepEqual(result, {msg: 'hello'});
                     done();
                 });
         });
@@ -116,9 +116,9 @@ describe('integration', function () {
                 address: 'Guangzhou China'
             };
             sira.rekuest('dealerships.upsert', dealership)
-                .send(app, function (err, c) {
+                .send(app, function (err, result) {
                     if (err) return done(err);
-                    t.includeProperties(c.result, dealership);
+                    t.includeProperties(result, dealership);
                     done();
                 });
         });
