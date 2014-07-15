@@ -1,19 +1,22 @@
-module.exports = {
-    "properties": {
-        "make": {
-            "type": String,
-            "required": true
+module.exports = function (t) {
+    return {
+        "properties": {
+            "make": {
+                "type": String,
+                "required": true
+            },
+            "model": {
+                "type": String,
+                "required": true
+            },
+            "desc": t.Text
         },
-        "model": {
-            "type": String,
-            "required": true
-        }
-    },
-    "relations": {
-        "dealer": {
-            "type": "belongsTo",
-            "model": "Dealership",
-            "foreignKey": "dealerId"
+        "relations": {
+            "dealer": {
+                "type": "belongsTo",
+                "model": "Dealership",
+                "foreignKey": "dealerId"
+            }
         }
     }
 };
