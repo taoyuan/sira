@@ -14,9 +14,7 @@ module.exports = function (app) {
         returns: { root: true }
     });
 
-    app.on('models', function (models) {
-        sira.expose.model(models.Dealership, dealerships);
-    });
+    sira.expose.model(app.models.Dealership, dealerships);
 
 };
 
