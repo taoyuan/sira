@@ -43,7 +43,9 @@ describe('integration', function () {
             var app = sira();
 
             app.registry.define('Color', {
-                name: String
+                properties: {
+                    name: String
+                }
             });
 
             app.phase(sira.boot.database());
