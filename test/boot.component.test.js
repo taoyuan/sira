@@ -12,9 +12,9 @@ describe('boot/component', function () {
         app = s.mockApplication();
     });
 
-    it('should return 2 phases', function () {
+    it('should return 1 phases', function () {
         var phases = bootComponent('./test/fixtures/base-app');
-        t.lengthOf(phases, 2);
+        t.lengthOf(phases, 1);
     });
 
 });

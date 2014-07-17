@@ -79,7 +79,6 @@ describe('integration', function () {
         beforeEach(function (done) {
             app = new sira.Application();
             // initialization phases
-            app.phase(sira.boot.handlers(path.join(root, 'handlers')));
             app.phase(sira.boot.definitions(path.join(root, 'models')));
             app.phase(configure);
             app.phase(sira.boot.database(database, schemap));
@@ -100,7 +99,7 @@ describe('integration', function () {
         });
 
         it('should handle a request with handler', function (done) {
-            sira.rekuest('dealerships.echo', {msg: 'hello'})
+            sira.rekuest('dealership.echo', {msg: 'hello'})
                 .send(app, function (err, result) {
                     if (err) return done(err);
                     t.deepEqual(result, {msg: 'hello'});
@@ -115,7 +114,7 @@ describe('integration', function () {
                 zip: 101010,
                 address: 'Guangzhou China'
             };
-            sira.rekuest('dealerships.upsert', dealership)
+            sira.rekuest('dealership.upsert', dealership)
                 .send(app, function (err, result) {
                     if (err) return done(err);
                     t.includeProperties(result, dealership);
