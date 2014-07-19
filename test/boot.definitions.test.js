@@ -4,7 +4,6 @@ var s = require('./support');
 var t = s.t;
 var bootDefinitions = require('../lib/boot/definitions');
 
-
 describe('boot/models', function () {
 
     describe('simple', function () {

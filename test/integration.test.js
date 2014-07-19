@@ -7,10 +7,10 @@ var sira = require('../');
 
 describe('integration', function () {
 
-    describe('boot.component', function () {
-        it('should load local component resources', function (done) {
+    describe('boot.module', function () {
+        it('should load local module resources', function (done) {
             var app = new sira.Application();
-            app.phase(sira.boot.component('./test/fixtures/base-app'));
+            app.phase(sira.boot.module('./test/fixtures/base-app'));
             app.phase(sira.boot.database());
             app.boot(function (err) {
                 if (err) return done(err);
@@ -23,8 +23,8 @@ describe('integration', function () {
 
         it('should extend app', function (done) {
             var app = new sira.Application();
-            app.phase(sira.boot.component('./test/fixtures/base-app'));
-            app.phase(sira.boot.component('./test/fixtures/extended-app'));
+            app.phase(sira.boot.module('./test/fixtures/base-app'));
+            app.phase(sira.boot.module('./test/fixtures/extended-app'));
             app.phase(sira.boot.database());
             app.boot(function (err) {
                 if (err) return done(err);

@@ -2,10 +2,10 @@
 
 var s = require('./support');
 var t = s.t;
-var bootComponent = require('../lib/boot/component');
+var bootModule = require('../lib/boot/module');
 
 
-describe('boot/component', function () {
+describe('boot/module', function () {
 
     var app;
     beforeEach(function () {
@@ -13,7 +13,7 @@ describe('boot/component', function () {
     });
 
     it('should return 1 phases', function () {
-        var phases = bootComponent('./test/fixtures/base-app');
+        var phases = bootModule('./test/fixtures/base-app');
         t.lengthOf(phases, 1);
     });
 
