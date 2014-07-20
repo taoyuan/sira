@@ -9,10 +9,8 @@ module.exports = function (Car) {
         cb(null, data);
     };
 
-    sira.expose(Car.echo, {
+    Car.expose('echo', {
         accepts: { name: 'data', source: 'payload' },
         returns: { root: true }
     });
-
-    sira.expose.model(Car);
 };

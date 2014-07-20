@@ -10,10 +10,8 @@ module.exports = function (Dealership) {
         cb(null, data);
     };
 
-    sira.share(Dealership.echo, {
+    Dealership.expose('echo', {
         accepts: { name: 'data', source: 'payload' },
         returns: { root: true }
     });
-
-    sira.expose.model(Dealership);
 };
