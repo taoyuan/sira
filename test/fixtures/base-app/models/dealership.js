@@ -1,15 +1,17 @@
-module.exports = {
-    "name": "Dealership",
-    "properties": {
-        "name": String,
-        "zip": Number,
-        "address": String
-    },
-    "relations": {
-        "cars": {
-            "type": "hasMany",
-            "model": "Car",
-            "foreignKey": "dealerId"
-        }
-    }
+"use strict";
+
+var sira = require('../../../../');
+
+module.exports = function (Dealership) {
+
+    Dealership.baseMethod = function () {};
+
+    Dealership.echo = function (data, cb) {
+        cb(null, data);
+    };
+
+    Dealership.expose('echo', {
+        accepts: { name: 'data', source: 'payload' },
+        returns: { root: true }
+    });
 };

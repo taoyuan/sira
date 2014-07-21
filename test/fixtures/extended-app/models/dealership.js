@@ -1,6 +1,6 @@
-module.exports = {
-    "name": "Dealership",
-    "properties": {
-        "phone": String
-    }
+"use strict";
+
+module.exports = function (Dealership, app) {
+
+    Dealership.extendedMethod = function () {};
 };
