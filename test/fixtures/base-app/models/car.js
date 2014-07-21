@@ -9,6 +9,7 @@ module.exports = function (Car) {
         cb(null, data);
     };
 
+    Car.exposeCrud();
     Car.expose('echo', {
         accepts: { name: 'data', source: 'payload' },
         returns: { root: true }

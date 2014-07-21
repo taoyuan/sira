@@ -10,6 +10,7 @@ module.exports = function (Dealership) {
         cb(null, data);
     };
 
+    Dealership.exposeCrud();
     Dealership.expose('echo', {
         accepts: { name: 'data', source: 'payload' },
         returns: { root: true }
