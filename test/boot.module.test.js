@@ -14,7 +14,7 @@ describe('boot/module', function () {
 
     it('should return 1 phases', function () {
         var phases = bootModule('./test/fixtures/base-app');
-        t.lengthOf(phases, 1);
+        t.lengthOf(phases, 2);
     });
 
 });
