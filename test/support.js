@@ -1,6 +1,5 @@
 "use strict";
 
-var _ = require('lodash');
 var chai = require('chai');
 chai.config.includeStack = true;
 var Schema = require('jugglingdb').Schema;
