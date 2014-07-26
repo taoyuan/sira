@@ -82,16 +82,7 @@ describe('integration', function () {
             app = new sira.Application();
             // initialization phases
             app.phase(sira.boot.definitions(path.join(root, 'models')));
-            app.phase(configure);
             app.phase(sira.boot.database(database, schemap));
-
-            // configure
-            function configure() {
-                // use some middlewares
-
-                // end use dispatcher
-                this.use(this.dispatcher);
-            }
 
             app.boot(function (err) {
                 if (err) return done(err);
@@ -109,7 +100,6 @@ describe('integration', function () {
                 });
         });
 
-
         it('should handle a request for model function', function (done) {
             var dealership = {
                 name: 'Sira',
@@ -122,6 +112,16 @@ describe('integration', function () {
                     t.includeProperties(result, dealership);
                     done();
                 });
+        });
+
+        it.only('should cancel using the future returned by handle', function (done) {
+            var future = sira.rekuest('car.order')
+                .send(app, function (err, result) {
+                    t.notOk(err);
+                    t.equal(future.canceled, true);
+                    done();
+                });
+            future.cancel();
         });
     });
 });

@@ -1,5 +1,6 @@
 module.exports = function (t) {
     return {
+        "curd": true,
         "properties": {
             "make": {
                 "type": String,

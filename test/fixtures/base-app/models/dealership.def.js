@@ -1,5 +1,6 @@
 module.exports = {
     "name": "Dealership",
+    "crud": true,
     "properties": {
         "name": String,
         "zip": Number,
