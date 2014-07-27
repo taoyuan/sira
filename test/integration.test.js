@@ -127,7 +127,7 @@ describe('integration', function () {
             sapp.boot(done);
         });
 
-        it('should cancel with future before resolve', function (done) {
+        it('should resolve with canceled when cancel the future', function (done) {
             var future = sira.rekuest('car.order')
                 .send(sapp, function (err) {
                     t.equal(err, 'canceled');
@@ -138,7 +138,7 @@ describe('integration', function () {
             t.ok(future.cancel());
         });
 
-        it('should not cancel after resolve', function (done) {
+        it('should return false when call cancel after resolve', function (done) {
             var future = sira.rekuest('car.order')
                 .send(sapp, function (err, result) {
                     t.notOk(err);
