@@ -15,7 +15,7 @@ module.exports = function (Car) {
 
         var h = setTimeout(function () {
             d.resolve(null, true);
-        }, 10000);
+        }, 500);
 
         function cancel() {
             clearTimeout(h);

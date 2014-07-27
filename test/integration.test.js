@@ -114,14 +114,40 @@ describe('integration', function () {
                 });
         });
 
-        it.only('should cancel using the future returned by handle', function (done) {
+    });
+
+    describe('cancelable', function () {
+
+        var sapp;
+
+        beforeEach(function (done) {
+            sapp = new sira.Application();
+            sapp.phase(sira.boot.module('./test/fixtures/base-app'));
+            sapp.phase(sira.boot.database());
+            sapp.boot(done);
+        });
+
+        it('should cancel with future before resolve', function (done) {
             var future = sira.rekuest('car.order')
-                .send(app, function (err, result) {
-                    t.notOk(err);
-                    t.equal(future.canceled, true);
+                .send(sapp, function (err) {
+                    t.equal(err, 'canceled');
+                    t.ok(future.resolved);
+                    t.ok(future.canceled);
                     done();
                 });
-            future.cancel();
+            t.ok(future.cancel());
+        });
+
+        it('should not cancel after resolve', function (done) {
+            var future = sira.rekuest('car.order')
+                .send(sapp, function (err, result) {
+                    t.notOk(err);
+                    t.equal(result, true);
+                    t.ok(future.resolved);
+                    t.notOk(future.canceled);
+                    t.notOk(future.cancel());
+                    done();
+                });
         });
     });
 });
