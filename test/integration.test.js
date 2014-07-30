@@ -92,7 +92,8 @@ describe('integration', function () {
         });
 
         it('should handle a request with handler', function (done) {
-            sira.rekuest('dealership.echo', {msg: 'hello'})
+            sira.rekuest('dealership.echo')
+                .payload({msg: 'hello'})
                 .send(app, function (err, result) {
                     if (err) return done(err);
                     t.deepEqual(result, {msg: 'hello'});
@@ -106,7 +107,8 @@ describe('integration', function () {
                 zip: 101010,
                 address: 'Guangzhou China'
             };
-            sira.rekuest('dealership.upsert', dealership)
+            sira.rekuest('dealership.upsert')
+                .payload(dealership)
                 .send(app, function (err, result) {
                     if (err) return done(err);
                     t.includeProperties(result, dealership);
