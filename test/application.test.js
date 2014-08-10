@@ -8,7 +8,6 @@ var sira = require('../');
 describe('app', function () {
     describe('when an error occurs', function() {
 
-
         it('should handle middleware errors', function (done) {
             var app = sira();
 
@@ -17,7 +16,7 @@ describe('app', function () {
                 c.throw('boom');
             });
 
-            sira.rekuest().send(app, function (err) {
+            app.rekuest().send(function (err) {
                 t.equal(err.message, 'boom');
                 done();
             });
@@ -58,7 +57,7 @@ describe('app', function () {
                 throw new Error('boom!');
             });
 
-            sira.rekuest().send(app, function (err, result) {
+            app.rekuest().send(function (err, result) {
                 t.equal(result, 'Got error');
                 done();
             });
@@ -93,7 +92,7 @@ describe('app.use(fn)', function () {
             });
         });
 
-        sira.rekuest().send(app, function (err) {
+        app.rekuest().send(function (err) {
             if (err) return done(err);
             t.deepEqual(calls, [1, 2, 3, 4, 5, 6]);
             done();
@@ -111,7 +110,7 @@ describe('app.respond', function () {
                 c.result = 'Hello';
             });
 
-            sira.rekuest().send(app, function (err, result) {
+            app.rekuest().send(function (err, result) {
                 t.equal(result, 'Hello');
                 done();
             });
@@ -127,7 +126,7 @@ describe('app.respond', function () {
                 c.result = result;
             });
 
-            sira.rekuest().send(app, function (err, result) {
+            app.rekuest().send(function (err, result) {
                 t.equal(result, result);
                 done();
             });
@@ -147,7 +146,7 @@ describe('app.context', function(){
             c.result = 'tao'
         });
 
-        sira.rekuest().send(app1, function (err, result) {
+        app1.rekuest().send(function (err, result) {
             t.equal(result, 'tao');
             done();
         });
@@ -159,7 +158,7 @@ describe('app.context', function(){
             c.result = 'tao';
         });
 
-        sira.rekuest().send(app2, function (err, result) {
+        app2.rekuest().send(function (err, result) {
             t.equal(result, 'tao');
             done();
         });

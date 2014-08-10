@@ -92,9 +92,9 @@ describe('integration', function () {
         });
 
         it('should handle a request with handler', function (done) {
-            sira.rekuest('dealership.echo')
+            app.rekuest('dealership.echo')
                 .payload({msg: 'hello'})
-                .send(app, function (err, result) {
+                .send(function (err, result) {
                     if (err) return done(err);
                     t.deepEqual(result, {msg: 'hello'});
                     done();
@@ -107,9 +107,9 @@ describe('integration', function () {
                 zip: 101010,
                 address: 'Guangzhou China'
             };
-            sira.rekuest('dealership.upsert')
+            app.rekuest('dealership.upsert')
                 .payload(dealership)
-                .send(app, function (err, result) {
+                .send(function (err, result) {
                     if (err) return done(err);
                     t.includeProperties(result, dealership);
                     done();
@@ -130,8 +130,8 @@ describe('integration', function () {
         });
 
         it('should resolve with canceled when cancel the future', function (done) {
-            var future = sira.rekuest('car.order')
-                .send(sapp, function (err) {
+            var future = sapp.rekuest('car.order')
+                .send(function (err) {
                     t.equal(err, 'canceled');
                     t.ok(future.resolved);
                     t.ok(future.canceled);
@@ -141,8 +141,8 @@ describe('integration', function () {
         });
 
         it('should return false when call cancel after resolve', function (done) {
-            var future = sira.rekuest('car.order')
-                .send(sapp, function (err, result) {
+            var future = sapp.rekuest('car.order')
+                .send(function (err, result) {
                     t.notOk(err);
                     t.equal(result, true);
                     t.ok(future.resolved);
