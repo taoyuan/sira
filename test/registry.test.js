@@ -32,7 +32,7 @@ describe('registry', function () {
         reg.define('B');
 
         var schemas = reg.build({
-            default: { driver: 'memory' },
+            default: 'memory',
             memory: { driver: 'memory' }
         });
 
