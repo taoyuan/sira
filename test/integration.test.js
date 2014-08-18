@@ -55,11 +55,10 @@ describe('integration', function () {
                 Color.create({name: 'green'});
                 Color.create({name: 'blue'});
 
-                Color.all(function () {
-                    console.log(arguments);
+                Color.all(function (err, colors) {
+                    t.lengthOf(colors, 3);
+                    done();
                 });
-
-                done();
             });
 
         });

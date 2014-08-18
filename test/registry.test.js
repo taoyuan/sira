@@ -26,4 +26,23 @@ describe('registry', function () {
         t.ok(schema.models['Model']);
         t.equal(models['Model'], schema.models['Model']);
     });
+
+    it('should work with db specified', function () {
+        reg.define('A', { db: 'memory' });
+        reg.define('B');
+
+        var schemas = reg.build({
+            default: { driver: 'memory' },
+            memory: { driver: 'memory' }
+        });
+
+        t.lengthOf(schemas, 2);
+        t.equal(schemas[0].name, 'memory');
+        t.equal(schemas[1].name, 'default');
+
+        t.ok(schemas[0].models['A']);
+        t.ok(schemas[1].models['B']);
+
+        t.deepEqual(Object.keys(reg.models), ['A', 'B']);
+    });
 });
