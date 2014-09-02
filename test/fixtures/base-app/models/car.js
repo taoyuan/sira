@@ -10,16 +10,14 @@ module.exports = function (Car) {
     };
 
     Car.order = function (context, cb) {
-        var d = context.defer(cancel);
-        d.done(cb);
+        var h;
+        if (cb.cancelled) cb.cancelled(function cancel() {
+            h && clearTimeout(h);
+        });
 
-        var h = setTimeout(function () {
-            d.resolve(null, true);
+        h = setTimeout(function () {
+            cb(null, true);
         }, 500);
-
-        function cancel() {
-            clearTimeout(h);
-        }
     };
 
     Car.expose('echo', {

@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "async": "^0.9.0",
+    "cancelify": "^0.1.3",
     "chai": "^1.9.1",
     "mocha": "^1.20.1"
   }

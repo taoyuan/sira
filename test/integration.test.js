@@ -1,8 +1,11 @@
 "use strict";
 
+var path = require('path');
+var cancelify = require('cancelify');
+
 var s = require('./support');
 var t = s.t;
-var path = require('path');
+
 var sira = require('../');
 
 describe('integration', function () {
@@ -129,26 +132,27 @@ describe('integration', function () {
         });
 
         it('should resolve with canceled when cancel the future', function (done) {
-            var future = sapp.rekuest('car.order')
-                .send(function (err) {
-                    t.equal(err, 'canceled');
-                    t.ok(future.resolved);
-                    t.ok(future.canceled);
-                    done();
-                });
-            t.ok(future.cancel());
+            var cancellable = cancelify(function () {
+                throw new Error('Should have been cancelled');
+            });
+            cancellable.future.cancelled(function (err) {
+                t.ok(err);
+                done();
+            });
+
+            sapp.rekuest('car.order')
+                .send(cancellable.future);
+
+            cancellable.cancel();
         });
 
         it('should return false when call cancel after resolve', function (done) {
-            var future = sapp.rekuest('car.order')
-                .send(function (err, result) {
+            sapp.rekuest('car.order')
+                .send(cancelify.future(function (err, result) {
                     t.notOk(err);
                     t.equal(result, true);
-                    t.ok(future.resolved);
-                    t.notOk(future.canceled);
-                    t.notOk(future.cancel());
                     done();
-                });
+                }));
         });
     });
 });
