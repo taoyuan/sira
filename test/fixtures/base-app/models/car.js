@@ -11,7 +11,7 @@ module.exports = function (Car) {
 
     Car.order = function (context, cb) {
         var h;
-        if (cb.cancelled) cb.cancelled(function cancel() {
+        context.possible.canceled(function cancel() {
             h && clearTimeout(h);
         });
 

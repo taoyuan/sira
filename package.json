@@ -19,6 +19,7 @@
   "dependencies": {
     "assert": "^1.1.1",
     "bootable": "^0.2.3",
+    "cancelify": "^0.1.3",
     "debug": "^1.0.4",
     "delegates": "0.0.3",
     "dotty": "0.0.2",
@@ -34,7 +35,6 @@
   },
   "devDependencies": {
     "async": "^0.9.0",
-    "cancelify": "^0.1.3",
     "chai": "^1.9.1",
     "mocha": "^1.20.1"
   }
