@@ -9,9 +9,9 @@ module.exports = function (Car) {
         cb(null, data);
     };
 
-    Car.order = function (context, cb) {
+    Car.order = function (future, cb) {
         var h;
-        context.possible.canceled(function cancel() {
+        future.canceled(function cancel() {
             h && clearTimeout(h);
         });
 
@@ -26,7 +26,7 @@ module.exports = function (Car) {
     });
 
     Car.expose('order', {
-        accepts: { name: 'context', source: 'context' },
+        accepts: { name: 'future', source: 'future' },
         returns: { root: true }
     });
 };
